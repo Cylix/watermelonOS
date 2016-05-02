@@ -1,26 +1,29 @@
 ###
+# Directories configuration
+###
+CFG_DIR		= config
+SRC_DIR		= src
+INC_DIR		=	include
+BUILD_DIR	=	build
+ISO_DIR		=	$(BUILD_DIR)/isodir
+BOOT_DIR	=	$(ISO_DIR)/boot
+GRUB_DIR	=	$(BOOT_DIR)/grub
+
+
+###
 # Compiler
 ###
 AS		=	i686-elf-as
 CC		=	i686-elf-gcc
 GRUB	= grub-mkrescue
 
+
 ###
 # Flags
 ###
-CFLAGS	+=	-std=gnu99 -ffreestanding -O2 -Wall -Wextra
+CFLAGS	+=	-std=gnu99 -ffreestanding -O2 -Wall -Wextra -I $(INC_DIR)
 LDFLAGS	+=	-nostdlib -lgcc
 
-
-###
-# Directories configuration
-###
-CFG_DIR		= config
-SRC_DIR		= src
-BUILD_DIR	=	build
-ISO_DIR		=	$(BUILD_DIR)/isodir
-BOOT_DIR	=	$(ISO_DIR)/boot
-GRUB_DIR	=	$(BOOT_DIR)/grub
 
 ###
 # Configuration files
@@ -28,12 +31,16 @@ GRUB_DIR	=	$(BOOT_DIR)/grub
 LD_CFG		=	$(CFG_DIR)/linker.ld
 GRUB_CFG	=	$(CFG_DIR)/grub.cfg
 
+
 ###
 # Kernel sources
 ###
-SRC		=	$(SRC_DIR)/boot.s		\
-				$(SRC_DIR)/kernel.c
+SRC		=	$(SRC_DIR)/boot.s				\
+				$(SRC_DIR)/kernel.c			\
+				$(SRC_DIR)/VGA_driver.c	\
+				$(SRC_DIR)/string.c
 OBJ		=	$(patsubst %.s, %.o, $(patsubst %.c, %.o, $(SRC)))
+
 
 ###
 # Output name configuration
@@ -41,10 +48,12 @@ OBJ		=	$(patsubst %.s, %.o, $(patsubst %.c, %.o, $(SRC)))
 BIN	=	WatermelonOS.bin
 ISO	=	WatermelonOS.iso
 
+
 ###
 # all rule
 ###
 all: $(BIN) $(ISO)
+
 
 ###
 # WatermelonOS.bin rule
@@ -52,6 +61,7 @@ all: $(BIN) $(ISO)
 $(BIN):	$(OBJ)
 				mkdir -p $(BUILD_DIR) $(ISO_DIR) $(BOOT_DIR) $(GRUB_DIR)
 				$(CC) -T $(LD_CFG) -o $(BOOT_DIR)/$(BIN) $(OBJ) $(LDFLAGS)
+
 
 ###
 # WatermelonOS.iso rule
@@ -61,11 +71,13 @@ $(ISO):	$(BIN)
 				cp $(GRUB_CFG) $(GRUB_DIR)
 				$(GRUB) -o $(BUILD_DIR)/$(ISO) $(ISO_DIR)
 
+
 ###
 # clean rule
 ###
 clean:
 				rm -f $(OBJ)
+
 
 ###
 # fclean rule
@@ -73,6 +85,7 @@ clean:
 fclean:	clean
 				rm -rf $(BUILD_DIR)
 				rm -rf $(BOOT_DIR)
+
 
 ###
 # re rule
