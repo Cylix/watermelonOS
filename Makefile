@@ -15,15 +15,18 @@ LDFLAGS	+=	-nostdlib -lgcc
 ###
 # Directories configuration
 ###
-GRUB_DIR	=	isodir
-LD_DIR		= linker
+CFG_DIR		= config
 SRC_DIR		= src
 BUILD_DIR	=	build
+ISO_DIR		=	$(BUILD_DIR)/isodir
+BOOT_DIR	=	$(ISO_DIR)/boot
+GRUB_DIR	=	$(BOOT_DIR)/grub
 
 ###
-# Linker configuration file
+# Configuration files
 ###
-LD_CFG	=	$(LD_DIR)/linker.ld
+LD_CFG		=	$(CFG_DIR)/linker.ld
+GRUB_CFG	=	$(CFG_DIR)/grub.cfg
 
 ###
 # Kernel sources
@@ -35,27 +38,28 @@ OBJ		=	$(patsubst %.s, %.o, $(patsubst %.c, %.o, $(SRC)))
 ###
 # Output name configuration
 ###
-BIN	=	$(BUILD_DIR)/WatermelonOS.bin
-ISO	=	$(BUILD_DIR)/WatermelonOS.iso
+BIN	=	WatermelonOS.bin
+ISO	=	WatermelonOS.iso
 
 ###
 # all rule
 ###
-all:	$(BIN) $(ISO)
+all: $(BIN) $(ISO)
 
 ###
 # WatermelonOS.bin rule
 ###
 $(BIN):	$(OBJ)
-				mkdir -p $(BUILD_DIR)
-				$(CC) -T $(LD_CFG) -o $(BIN) $(OBJ) $(LDFLAGS)
+				mkdir -p $(BUILD_DIR) $(ISO_DIR) $(BOOT_DIR) $(GRUB_DIR)
+				$(CC) -T $(LD_CFG) -o $(BOOT_DIR)/$(BIN) $(OBJ) $(LDFLAGS)
 
 ###
 # WatermelonOS.iso rule
 ###
 $(ISO):	$(BIN)
-				cp $(BIN) $(GRUB_DIR)/boot/
-				$(GRUB) -o $(ISO) $(GRUB_DIR)
+				mkdir -p $(BUILD_DIR) $(ISO_DIR) $(BOOT_DIR) $(GRUB_DIR)
+				cp $(GRUB_CFG) $(GRUB_DIR)
+				$(GRUB) -o $(BUILD_DIR)/$(ISO) $(ISO_DIR)
 
 ###
 # clean rule
@@ -67,10 +71,10 @@ clean:
 # fclean rule
 ###
 fclean:	clean
-				rm -f $(BIN)
-				rm -f $(ISO)
+				rm -rf $(BUILD_DIR)
+				rm -rf $(BOOT_DIR)
 
 ###
-# re rull
+# re rule
 ###
 re: 		fclean all
