@@ -16,5 +16,5 @@ kernel_main(void) {
   VGA_driver_initialize();
 
   //! Greeting message
-  VGA_driver_writestring("Hello, kernel World!\n");
+  VGA_driver_putstr("Hello, kernel World\n");
 }

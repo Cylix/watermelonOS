@@ -76,13 +76,36 @@ void VGA_driver_setcolor(enum vga_color fg, enum vga_color bg);
 //!   None
 void VGA_driver_putchar(char c);
 
-//! VGA_driver_writestring
+//! VGA_driver_putstr
 //!   Write a string onto the terminal
 //!   Move the cursor
 //!
 //! Input:
-//!   data: string to print
+//!   str: string to print
 //!
 //! Output:
 //!   None
-void VGA_driver_writestring(const char* data);
+void VGA_driver_putstr(const char* str);
+
+//! VGA_driver_break_line
+//!   Break line and do scrolling if necessary
+//!
+//! Input:
+//!   None
+//!
+//! Output:
+//!   None
+void
+VGA_driver_break_line(void);
+
+//! VGA_driver_scroll
+//!   Scroll the printed data 1 line to the top
+//!   Cursor also scroll
+//!
+//! Input:
+//!   None
+//!
+//! Output:
+//!   None
+void
+VGA_driver_scroll(void);
