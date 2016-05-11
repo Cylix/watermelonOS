@@ -41,8 +41,9 @@ LIBS			:= $(LIBS) $(KERNEL_ARCH_LIBS) -nostdlib -lk -lgcc
 ###
 # Object files
 ###
-OBJS			:=	$(KERNEL_ARCH_OBJS) \
-							kernel/kernel.o
+OBJS			:=	$(KERNEL_ARCH_OBJS) 			\
+							kernel/kernel.o						\
+							kernel/frame_allocator.o
 
 
 ###
