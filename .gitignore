@@ -35,3 +35,8 @@
 build
 *.bin
 *.iso
+*.kernel
+
+# Build directories
+sysroot
+isodir

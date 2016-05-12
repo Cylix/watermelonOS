@@ -26,6 +26,9 @@ _start:
 	movl $stack_top, %esp
 
 	# Initialize the core kernel before running the global constructors.
+	# Pass as parameter the EBX register content
+	# EBX register contains the address of the GRUB filled multiboot_info structure
+	push %ebx
 	call kernel_init
 
 	# Transfer control to the main kernel.
