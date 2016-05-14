@@ -10,6 +10,7 @@ static printf_flag_assoc_t _flags[] = {
 	{ 'u', &printf_handle_flag_u },
 	{ 'x', &printf_handle_flag_x },
 	{ 'X', &printf_handle_flag_X },
+	{ 'p', &printf_handle_flag_p },
 	{ 0, NULL }
 };
 
@@ -84,6 +85,11 @@ printf_handle_flag_x(va_list* parameters) {
 
 int
 printf_handle_flag_X(va_list* parameters) {
+	return _print_nb(parameters, 1, 16);
+}
+
+int
+printf_handle_flag_p(va_list* parameters) {
 	return _print_nb(parameters, 1, 16);
 }
 

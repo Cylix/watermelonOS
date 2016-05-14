@@ -33,8 +33,9 @@ SECTIONS
 		*(COMMON)
 		*(.bss)
 		*(.bootstrap_stack)
-
-    /* create variable whose address refers to the end of kernel address space */
-    end_kernel = .;
 	}
+
+	/* create variable whose address refers to the end of kernel address space */
+	/* ensure that variable is 4096-bytes aligned */
+	end_kernel = ALIGN(4K);
 }

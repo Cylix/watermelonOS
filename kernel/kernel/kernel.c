@@ -1,31 +1,21 @@
 #include <kernel/tty.h>
+#include <kernel/frame_allocator.h>
 #include <stdio.h>
 #include <multiboot.h>
 
-void kernel_init(multiboot_info_t* multiboot_info) {
+int
+kernel_init(multiboot_info_t* multiboot_info) {
 	tty_initialize();
 
-	if (multiboot_info->flags & (1<<0)) {
-		printf("mem_lower: %X\nmem_upper: %X\n\n",
-					 multiboot_info->mem_lower * 1024,
-					 multiboot_info->mem_upper * 1024);
+	if (frame_allocator_init(multiboot_info) == -1) {
+		printf("[ERR] Can't initialize the frame allocator.\n");
+		return -1;
 	}
 
-	if (multiboot_info->flags & (1<<5)) {
-		memory_map_t* map = (memory_map_t*)multiboot_info->mmap_addr;
-
-		while (map < multiboot_info->mmap_addr + multiboot_info->mmap_length) {
-			printf("(MAP) [%u] %X %X (%X %X)\n",
-						 map->type,
-				 	 	 map->base_addr_high, map->base_addr_low,
-						 map->length_high, map->length_low);
-
-			map = (void*)map + map->size + sizeof(unsigned long);
-		}
-	}
+	return 0;
 }
 
 void
 kernel_main(void) {
-	printf("\nHello, kernel World!\n");
+	printf("[LOG] Hello, kernel World!\n");
 }

@@ -30,6 +30,7 @@ int printf_handle_flag_d(va_list*);
 int printf_handle_flag_u(va_list*);
 int printf_handle_flag_x(va_list*);
 int printf_handle_flag_X(va_list*);
+int printf_handle_flag_p(va_list*);
 
 //! printf
 //!   Formats and print arguments under the control of the format parameter

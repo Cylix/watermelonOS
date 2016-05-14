@@ -30,14 +30,20 @@ _start:
 	# EBX register contains the address of the GRUB filled multiboot_info structure
 	push %ebx
 	call kernel_init
+	add %esp, 4
+
+	# If kernel failed to initialize, immediatly hang.
+	cmp $-1, %eax
+	je hang
 
 	# Transfer control to the main kernel.
 	call kernel_main
 
 	# Hang if kernel_main unexpectedly returns.
+hang:
 	cli
-.Lhang:
+hang_loop:
 	hlt
-	jmp .Lhang
+	jmp hang_loop
 
 	.size _start, . - _start
