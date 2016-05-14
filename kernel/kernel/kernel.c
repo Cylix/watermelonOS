@@ -1,5 +1,5 @@
-#include <kernel/tty.h>
-#include <kernel/frame_allocator.h>
+#include <kernel/display/tty.h>
+#include <kernel/memory/frame_allocator.h>
 #include <stdio.h>
 #include <multiboot.h>
 
@@ -8,7 +8,7 @@ kernel_init(const multiboot_info_t* multiboot_info) {
 	tty_initialize();
 
 	if (frame_allocator_init(multiboot_info) == -1) {
-		printf("[ERR] Can't initialize the frame allocator.\n");
+		printf("[ERR ] Can't initialize the frame allocator.\n");
 		return -1;
 	}
 
@@ -17,5 +17,5 @@ kernel_init(const multiboot_info_t* multiboot_info) {
 
 void
 kernel_main(void) {
-	printf("[LOG] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
 }

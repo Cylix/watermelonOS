@@ -1,4 +1,4 @@
-#include <kernel/frame_allocator.h>
+#include <kernel/memory/frame_allocator.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -55,7 +55,7 @@ _analyze_segment(const memory_map_t* map) {
 int
 frame_allocator_init(const multiboot_info_t* multiboot_info) {
   if (MULTIBOOT_INFO_GET_FLAG(multiboot_info->flags, MULTIBOOT_INFO_MEM_MAP) == 0) {
-    printf("[ERR] Memory map has not been initialized by the bootloader.\n");
+    printf("[ERR ] Memory map has not been initialized by the bootloader.\n");
     return -1;
   }
 

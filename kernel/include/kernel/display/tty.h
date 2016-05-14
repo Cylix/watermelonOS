@@ -2,7 +2,6 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include <kernel/vga.h>
 
 //! tty_state
 //! attributes defining the current state of the terminal
@@ -27,17 +26,6 @@ typedef struct tty_state_s {
 //! Output:
 //!   None
 void tty_initialize(void);
-
-//! tty_setcolor
-//!   Change the color used to display characters
-//!
-//! Input:
-//!   fg: foreground color
-//!   bg: background color
-//!
-//! Output:
-//!   None
-void tty_setcolor(enum vga_color fg, enum vga_color bg);
 
 //! tty_putchar
 //!   Print a single character onto the terminal

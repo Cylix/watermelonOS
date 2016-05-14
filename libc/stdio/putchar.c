@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #if defined(__is_kernel)
-#include <kernel/tty.h>
+#include <kernel/display/tty.h>
 #endif
 
 int

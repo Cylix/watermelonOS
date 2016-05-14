@@ -1,4 +1,5 @@
-#include <kernel/tty.h>
+#include <kernel/display/tty.h>
+#include <i386/display/vga.h>
 
 static tty_state_t state;
 
@@ -11,11 +12,6 @@ tty_initialize(void) {
   for (size_t y = 0; y < VGA_HEIGHT; ++y)
     for (size_t x = 0; x < VGA_WIDTH; ++x)
       VGA_print_at(' ', state.color, x, y);
-}
-
-void
-tty_setcolor(enum vga_color fg, enum vga_color bg) {
-  state.color = VGA_make_color(fg, bg);
 }
 
 void
