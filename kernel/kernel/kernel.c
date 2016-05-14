@@ -4,7 +4,7 @@
 #include <multiboot.h>
 
 int
-kernel_init(multiboot_info_t* multiboot_info) {
+kernel_init(const multiboot_info_t* multiboot_info) {
 	tty_initialize();
 
 	if (frame_allocator_init(multiboot_info) == -1) {

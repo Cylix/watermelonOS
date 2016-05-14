@@ -8,7 +8,7 @@
 //! This had been defined in kernel/arch/XXX/linker.ld
 extern uint32_t end_kernel;
 //! Convenience variable
-extern void* end_kernel_addr;
+extern void* const end_kernel_addr;
 
 //! Set the size of allocated frames
 #define FRAME_ALLOC_FRAME_SIZE 4096
@@ -46,7 +46,7 @@ typedef void* frame_t;
 //! Output:
 //!   0 on success, -1 otherwise
 //!   Error occurs when the memory map of the multiboot_info structure has not been initialized
-int frame_allocator_init(multiboot_info_t* multiboot_info);
+int frame_allocator_init(const multiboot_info_t* multiboot_info);
 
 //! frame_allocator_alloc
 //!   Very simple frame allocator: allocates and return the first free frame.
