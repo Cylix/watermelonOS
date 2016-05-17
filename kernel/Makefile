@@ -96,6 +96,7 @@ install: install-headers install-kernel
 install-headers:
 									mkdir -p $(DESTDIR)$(INCLUDEDIR)
 									cp -Rv include/* $(DESTDIR)$(INCLUDEDIR)
+									cp -Rv $(ARCHDIR)/include/* $(DESTDIR)$(INCLUDEDIR)
 
 
 ###

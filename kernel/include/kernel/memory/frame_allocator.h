@@ -21,14 +21,14 @@ extern void* const end_kernel_addr;
 #define MULTIBOOT_INFO_USABLE_SEGMENT 1
 
 //! frame_alloc_free_segment
-//! free frames are stored within a stack of free segments (that can contain multiple frames)
-//! this stack is initialized from the multiboot memory map at kernel initialization
+//!   free frames are stored within a stack of free segments (that can contain multiple frames)
+//!   this stack is initialized from the multiboot memory map at kernel initialization
 //!
 //! Fields:
 //!   size: size of the free memory segment
 //!   next: pointer to the next free memory segment
 typedef struct frame_allocator_free_segment_s {
-  uint32_t size;
+  unsigned int size;
   struct frame_allocator_free_segment_s* next;
 } frame_allocator_free_segment_t;
 
