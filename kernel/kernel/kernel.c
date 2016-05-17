@@ -15,6 +15,34 @@ kernel_init(const multiboot_info_t* multiboot_info) {
 		return -1;
 	}
 
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+	printf("[INFO] Hello, kernel World!\n");
+
+
 	if (paging_init() == -1) {
 		printf("[ERR ] Can't initialize the paging system.\n");
 		return -1;
@@ -25,5 +53,5 @@ kernel_init(const multiboot_info_t* multiboot_info) {
 
 void
 kernel_main(void) {
-	printf("[INFO] Hello, kernel World!\n");
+	//printf("[INFO] Hello, kernel World!\n");
 }

@@ -55,8 +55,9 @@ tty_scroll(void) {
     for (size_t x = 0; x < VGA_WIDTH; ++x) {
       const size_t prev_row_pos = (y - 1) * VGA_WIDTH + x;
       const size_t curr_row_pos = y * VGA_WIDTH + x;
-      VGA_set_at(prev_row_pos, VGA_get_at(curr_row_pos));
+      VGA_set_at(VGA_get_at(curr_row_pos), prev_row_pos);
     }
+
   //! Ensure that last line is emptied
   for (size_t x = 0; x < VGA_WIDTH; ++x)
     VGA_print_at(' ', state.color, x, VGA_HEIGHT - 1);
