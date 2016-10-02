@@ -1,10 +1,25 @@
 #pragma once
 
 //! typedef for convenience
-typedef uint32_t* page_dir_t;
 typedef uint32_t* page_tab_t;
+typedef page_tab_t* page_dir_t;
 
-extern page_dir_t paging_page_directory;
+//! Size of page directory and page table
+#define PAGING_PAGE_DIR_NB_ENTRIES      1024
+#define PAGING_PAGE_TAB_NB_ENTRIES      1024
+
+//! Page directory
+//! Contains physical addresses to available page tables with MMU configuration
+//! CAUTION: do not try to use the listed adresses: those are physical adresses bitwised for MMU configuration
+extern page_tab_t paging_page_directory[PAGING_PAGE_DIR_NB_ENTRIES];
+//! Virtual page table
+//! Contains virtual adresses to available page tables
+//! CAUTION: do not try to use the listed adresses when paging is disabled
+extern page_tab_t paging_virtual_page_table_addrs[PAGING_PAGE_DIR_NB_ENTRIES];
+//! Page tables
+//! Contains physical adresses to available page tables
+//! CAUTION: do not try to use the listed adresses when paging is enabled
+extern page_tab_t paging_page_tables[PAGING_PAGE_DIR_NB_ENTRIES];
 
 //! Page directory and page table configuration: flags bits positions
 #define PAGING_PAGE_FLAG_GLOBAL_BIT_POS          8
@@ -31,10 +46,6 @@ extern page_dir_t paging_page_directory;
 //! Defines for convenience and code clarity
 #define PAGING_PAGE_DIR_EMPTY_ENTRY     0x00000000
 #define PAGING_PAGE_TAB_EMPTY_ENTRY     0x00000000
-
-//! Size of page directory and page table
-#define PAGING_PAGE_DIR_NB_ENTRIES      1024
-#define PAGING_PAGE_TAB_NB_ENTRIES      1024
 
 //! paging_load_page_directory
 //!   load the given page directory so that it can be used by the CPU for address translation
