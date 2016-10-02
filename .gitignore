@@ -40,3 +40,6 @@ build
 # Build directories
 sysroot
 isodir
+
+# misc
+TODO
